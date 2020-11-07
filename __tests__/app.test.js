@@ -57,4 +57,18 @@ describe('portfolio-site-be routes', () => {
         expect(res.body).toEqual(expect.arrayContaining(facts));
       });
   });
+
+  it('deletes a fact with DELETE', async() => {
+    const fact = await Fact.insert({
+      type: 'professional',
+      colorCode: 'yellow',
+      text: 'blarg blarg blarg',
+      imageUrl: 'F-url.com'
+    });
+
+    const response = await request(app)
+      .delete(`/api/v1/facts/${fact.id}`);
+    
+    expect(response.body).toEqual(fact);
+  });
 });
