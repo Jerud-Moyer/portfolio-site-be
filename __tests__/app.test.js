@@ -71,4 +71,18 @@ describe('portfolio-site-be routes', () => {
     
     expect(response.body).toEqual(fact);
   });
+
+  it('gets facts by ID', async() => {
+    const fact = await Fact.insert({
+      type: 'memory',
+      colorCode: 'blue',
+      text: 'blah blah blah',
+      imageUrl: 'url.com'
+    });
+
+    const response = await request(app)
+      .get(`/api/v1/facts/${fact.id}`);
+    expect(response.body).toEqual(fact);
+
+  });
 });
