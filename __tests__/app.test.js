@@ -85,4 +85,31 @@ describe('portfolio-site-be routes', () => {
     expect(response.body).toEqual(fact);
 
   });
+
+  it('updates a fact via PUT', async() => {
+    const fact = await Fact.insert({
+      type: 'memory',
+      colorCode: 'blue',
+      text: 'blah blah blah',
+      imageUrl: 'url.com'
+    });
+
+    return request(app)
+      .put(`/api/v1/facts/${fact.id}`)
+      .send({
+        type: 'personal',
+        colorCode: 'yellow',
+        text: 'blargh blargh blargh',
+        imageUrl: 'Furl.com'
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          id: expect.any(String),
+          type: 'personal',
+          colorCode: 'yellow',
+          text: 'blargh blargh blargh',
+          imageUrl: 'Furl.com'
+        });
+      });
+  });
 });
