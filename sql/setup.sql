@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS facts;
+
+
+CREATE TABLE facts (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  type TEXT NOT NULL,
+  color_code TEXT NOT NULL,
+  text TEXT NOT NULL,
+  image_url TEXT NOT NULL
+)
